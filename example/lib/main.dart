@@ -179,14 +179,23 @@ class MyApp extends StatelessWidget {
             MaterialPageRoute(builder: (c) => RealTimeUpdatesPage())),
       ),
     ];
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ARKit Demo'),
+    return MaterialApp(
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      body:
-          ListView(children: samples.map((s) => SampleItem(item: s)).toList()),
+      home: MyHomePage(title: 'classroom'),
     );
+
+//    return Scaffold(
+//      appBar: AppBar(
+//        title: const Text('ARKit Demo'),
+//      ),
+//      body:
+//          ListView(children: samples.map((s) => SampleItem(item: s)).toList()),
+//    );
+
   }
 }
 

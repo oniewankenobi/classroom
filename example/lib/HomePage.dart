@@ -1,5 +1,6 @@
 
 //import 'package:classroom/ScannerPage.dart';
+import 'package:arkit_plugin_example/ScannerPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,54 +18,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 1;
+  final _pageController = PageController(
+    initialPage: 1,
+  );
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Colors.grey,
-        child: IconButton(
-          icon: Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        padding: EdgeInsets.only(
-          top: 70,
-          left: 50,
-          right: 50,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            SizedBox(height: 40),
-            Text(
-              "Hello,",
-              style: TextStyle(
-                fontSize: 70,
-              ),
-            ),
-            SizedBox(height: 10),
-            Text(
-              "Chris Tine",
-              style: TextStyle(
-                color: Color.fromRGBO(255, 87, 87, 1),
-                fontSize: 90,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(
-              color: Colors.grey,
-            ),
-            SizedBox(height: 30),
-            _buildScienceSection(context),
-          ],
-        ),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (int page) {
+          setState(() {
+            _selectedIndex = page;
+          });
+        },
+        children: <Widget>[
+          ScannerPage(),
+          _buildHomePage(context),
+        ],
       ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(84, 84, 84, 1),
@@ -72,16 +44,16 @@ class _MyHomePageState extends State<MyHomePage> {
         selectedItemColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(
+              Icons.camera_alt,
+            ),
+            title: Text('Scan'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              Icons.home,
+            ),
             title: Text('Home'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.business),
-            title: Text('Business'),
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            title: Text('School'),
           ),
         ],
         currentIndex: _selectedIndex,
@@ -90,10 +62,50 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
+  Widget _buildHomePage(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      padding: EdgeInsets.only(
+        top: 70,
+        left: 50,
+        right: 50,
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          SizedBox(height: 40),
+          Text(
+            "Hello,",
+            style: TextStyle(
+              fontSize: 70,
+            ),
+          ),
+          SizedBox(height: 10),
+          Text(
+            "Chris Tine",
+            style: TextStyle(
+              color: Color.fromRGBO(255, 87, 87, 1),
+              fontSize: 90,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 10),
+          Divider(
+            color: Colors.grey,
+          ),
+          SizedBox(height: 30),
+          _buildScienceSection(context),
+        ],
+      ),
+    );
+  }
+
   void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
+    if (index == 1) {
+      _pageController.jumpToPage(1);
+    } else {
+      _pageController.jumpToPage(0);
+    }
   }
 
   Widget _buildScienceSection(BuildContext context) {
