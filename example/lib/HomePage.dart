@@ -1,9 +1,11 @@
 
-import 'package:classroom/ScannerPage.dart';
+//import 'package:classroom/ScannerPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'ClassPage.dart';
+
+//import 'ClassPage.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -36,34 +38,34 @@ class _MyHomePageState extends State<MyHomePage> {
           left: 50,
           right: 50,
         ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              SizedBox(height: 40),
-              Text(
-                "Hello,",
-                style: TextStyle(
-                  fontSize: 70,
-                ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(height: 40),
+            Text(
+              "Hello,",
+              style: TextStyle(
+                fontSize: 70,
               ),
-              SizedBox(height: 10),
-              Text(
-                "Chris Tine",
-                style: TextStyle(
-                  color: Color.fromRGBO(255, 87, 87, 1),
-                  fontSize: 90,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            SizedBox(height: 10),
+            Text(
+              "Chris Tine",
+              style: TextStyle(
+                color: Color.fromRGBO(255, 87, 87, 1),
+                fontSize: 90,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(height: 10),
-              Divider(
-                color: Colors.grey,
-              ),
-              SizedBox(height: 30),
-              _buildScienceSection(context),
-            ],
-          ),
+            ),
+            SizedBox(height: 10),
+            Divider(
+              color: Colors.grey,
+            ),
+            SizedBox(height: 30),
+            _buildScienceSection(context),
+          ],
         ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: Color.fromRGBO(84, 84, 84, 1),
         unselectedItemColor: Colors.grey,
@@ -85,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
       ),
-      );
+    );
   }
 
   void _onItemTapped(int index) {
@@ -165,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ClassPage(title)
+              builder: (context) => ClassPage(title)
           ),
         );
       },
@@ -181,24 +183,24 @@ class _MyHomePageState extends State<MyHomePage> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                icon,
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: Text(
-                    title,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 25,
-                    ),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              icon,
+              Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  title,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 25,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 }
