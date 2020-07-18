@@ -15,7 +15,7 @@ class ScannerPageState extends State<ScannerPage> {
   Future _scanQR() async {
 //    try {
       ScanResult qrResult = await BarcodeScanner.scan();
-      if (qrResult.rawContent != null) {
+      if (qrResult.rawContent == 'brain') {
         Navigator.push(
           context,
           MaterialPageRoute(
