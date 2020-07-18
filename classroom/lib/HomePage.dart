@@ -21,6 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color.fromRGBO(84, 84, 84, 1),
         title: Text("Classes"),
         actions: <Widget>[
           IconButton(
@@ -34,6 +35,15 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.grey,
+        child: IconButton(
+          icon: Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: Container(
         padding: EdgeInsets.only(
           top: 30,
@@ -43,18 +53,19 @@ class _MyHomePageState extends State<MyHomePage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              SizedBox(height: 50),
+              SizedBox(height: 40),
               Text(
                 "Hello,",
                 style: TextStyle(
-                  fontSize: 40,
+                  fontSize: 50,
                 ),
               ),
               SizedBox(height: 10),
               Text(
                 "Chris Tine",
                 style: TextStyle(
-                  fontSize: 50,
+                  color: Color.fromRGBO(255, 87, 87, 1),
+                  fontSize: 60,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -68,6 +79,9 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Color.fromRGBO(84, 84, 84, 1),
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.white,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -83,7 +97,6 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
       );
@@ -100,54 +113,59 @@ class _MyHomePageState extends State<MyHomePage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Science",
+          " My Classes",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: <Widget>[
-              _buildClassCard(
-                context,
-                "Chemistry",
-                Icon(
-                  Icons.bubble_chart,
-                  color: Colors.green,
-                  size: 70,
-                ),
+        SizedBox(height: 15),
+        Row(
+          children: <Widget>[
+            _buildClassCard(
+              context,
+              "Chemistry",
+              Icon(
+                Icons.bubble_chart,
+                color: Colors.white,
+                size: 70,
               ),
-              SizedBox(width: 10),
-              _buildClassCard(
-                context,
-                "Biology",
-                Icon(
-                  Icons.school,
-                  color: Colors.blue,
-                  size: 70,
-                ),
+              Color.fromRGBO(102, 210, 210, 1),
+            ),
+            SizedBox(width: 20),
+            _buildClassCard(
+              context,
+              "Biology",
+              Icon(
+                Icons.school,
+                color: Colors.white,
+                size: 70,
               ),
-              SizedBox(width: 10),
-              _buildClassCard(
-                context,
-                "Physics",
-                Icon(
-                  Icons.smartphone,
-                  color: Colors.red,
-                  size: 70,
-                ),
+              Color.fromRGBO(184, 125, 200, 1)
+            ),
+            SizedBox(width: 10),
+          ],
+        ),
+        SizedBox(height: 15),
+        Row(
+          children: <Widget>[
+            _buildClassCard(
+              context,
+              "Physics",
+              Icon(
+                Icons.smartphone,
+                color: Colors.white,
+                size: 70,
               ),
-            ],
-          ),
+              Color.fromRGBO(255, 87, 87, 1),
+            ),
+          ],
         ),
       ],
     );
   }
 
-  Widget _buildClassCard(BuildContext context, String title, Icon icon) {
+  Widget _buildClassCard(BuildContext context, String title, Icon icon, Color color) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -158,12 +176,13 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
       child: Container(
-        width: 150,
-        height: 150,
+        width: 160,
+        height: 160,
         child: Card(
+          elevation: 5,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           semanticContainer: true,
-          color: Colors.white.withOpacity(0.8),
+          color: color,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -176,6 +195,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   child: Text(
                     title,
                     style: TextStyle(
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
