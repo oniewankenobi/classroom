@@ -18,22 +18,22 @@ class ClassPage extends StatelessWidget {
     Icon(
       Icons.cake,
       color: Colors.orange,
-      size: 40,
+      size: 50,
     ),
     Icon(
       Icons.battery_full,
       color: Color.fromRGBO(102, 210, 210, 1),
-      size: 40,
+      size: 50,
     ),
     Icon(
       Icons.color_lens,
       color: Color.fromRGBO(184, 125, 200, 1),
-      size: 40,
+      size: 50,
     ),
     Icon(
       Icons.access_alarm,
       color: Color.fromRGBO(255, 87, 87, 1),
-      size: 40,
+      size: 50,
     ),
   ];
 
@@ -56,16 +56,17 @@ class ClassPage extends StatelessWidget {
   Widget _buildClassPage(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(
-        left: 30,
-        right: 30,
+        left: 50,
+        right: 50,
       ),
       child: Column(
         children: <Widget>[
           _buildTitle(context),
+          SizedBox(height: 20),
           Expanded(
             child: ListView.separated(
               itemBuilder: (BuildContext context, int index) => _buildPolyItem(context, index),
-              separatorBuilder: (BuildContext context, int index) => SizedBox(height: 5),
+              separatorBuilder: (BuildContext context, int index) => SizedBox(height: 10),
               itemCount: nPolys,
             ),
           ),
@@ -79,8 +80,8 @@ class ClassPage extends StatelessWidget {
       children: <Widget>[
         Image.asset(
           "images/chem-removebg-preview.png",
-          height: 200,
-          width: 300,
+          height: 300,
+          width: 400,
           fit: BoxFit.contain,
           alignment: Alignment.centerRight,
         ),
@@ -88,7 +89,7 @@ class ClassPage extends StatelessWidget {
         Text(
           "CHEMISTRY",
           style: TextStyle(
-            fontSize: 40,
+            fontSize: 60,
             fontWeight: FontWeight.bold,
           ),
           textAlign: TextAlign.center,
@@ -118,12 +119,12 @@ class ClassPage extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: Container(
-          height: 100,
-          padding: EdgeInsets.all(20),
+          height: 120,
+          padding: EdgeInsets.all(30),
           child: Row(
             children: <Widget>[
               icons[index],
-              SizedBox(width: 20),
+              SizedBox(width: 30),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -132,7 +133,7 @@ class ClassPage extends StatelessWidget {
                     topics[index],
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 25,
                       color: Colors.black,
                     ),
                   ),
@@ -140,7 +141,8 @@ class ClassPage extends StatelessWidget {
                     "Lorem Ipsum Dolor",
                     textAlign: TextAlign.left,
                     style: TextStyle(
-                        color: Colors.grey
+                      fontSize: 18,
+                      color: Colors.grey,
                     ),
                   ),
                 ],
