@@ -20,21 +20,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromRGBO(84, 84, 84, 1),
-        title: Text("Classes"),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.camera_alt),
-            onPressed: () => Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ScannerPage()
-              ),
-            ),
-          ),
-        ],
-      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.grey,
         child: IconButton(
@@ -46,7 +31,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Container(
         padding: EdgeInsets.only(
-          top: 30,
+          top: 70,
           left: 30,
           right: 30,
         ),
