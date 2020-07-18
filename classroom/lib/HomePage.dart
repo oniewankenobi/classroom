@@ -106,46 +106,49 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         SizedBox(height: 25),
-        Row(
-          children: <Widget>[
-            _buildClassCard(
-              context,
-              "Chemistry",
-              Icon(
-                Icons.bubble_chart,
-                color: Colors.white,
-                size: 100,
+        SingleChildScrollView(
+          scrollDirection: Axis.horizontal,
+          child: Row(
+            children: <Widget>[
+              _buildClassCard(
+                context,
+                "Chemistry",
+                Icon(
+                  Icons.bubble_chart,
+                  color: Colors.white,
+                  size: 100,
+                ),
+                Color.fromRGBO(102, 210, 210, 1),
               ),
-              Color.fromRGBO(102, 210, 210, 1),
-            ),
-            SizedBox(width: 20),
-            _buildClassCard(
-              context,
-              "Biology",
-              Icon(
-                Icons.school,
-                color: Colors.white,
-                size: 100,
+              SizedBox(width: 20),
+              _buildClassCard(
+                  context,
+                  "Biology",
+                  Icon(
+                    Icons.school,
+                    color: Colors.white,
+                    size: 100,
+                  ),
+                  Color.fromRGBO(184, 125, 200, 1)
               ),
-              Color.fromRGBO(184, 125, 200, 1)
-            ),
-            SizedBox(width: 20),
-            _buildClassCard(
-              context,
-              "Physics",
-              Icon(
-                Icons.smartphone,
-                color: Colors.white,
-                size: 100,
+              SizedBox(width: 20),
+              _buildClassCard(
+                context,
+                "Physics",
+                Icon(
+                  Icons.smartphone,
+                  color: Colors.white,
+                  size: 100,
+                ),
+                Color.fromRGBO(255, 87, 87, 1),
               ),
-              Color.fromRGBO(255, 87, 87, 1),
-            ),
-          ],
+            ],
+          ),
         ),
-        SizedBox(height: 0),
+        SizedBox(height: 20),
         Container(
           width: 900,
-          height: 364,
+          height: 270,
           decoration: BoxDecoration(
             image: DecorationImage(
               image: AssetImage("images/playground-removebg-preview.png"),
