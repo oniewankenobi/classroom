@@ -1,6 +1,9 @@
 
+import 'package:classroom/ScannerPage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import 'ClassPage.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -12,38 +15,48 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text("Classes"),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.camera_alt),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ScannerPage()
+              ),
+            ),
+          ),
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+      body: Row(
+        children: <Widget>[
+          _buildClassCard(context, "Chemistry"),
+          _buildClassCard(context, "Biology"),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildClassCard(BuildContext context, String title) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ClassPage(title)
+          ),
+        );
+      },
+      child: Card(
+        color: Colors.white,
+        child: Container(
+          padding: EdgeInsets.all(20.0),
+          child: Text(title),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
