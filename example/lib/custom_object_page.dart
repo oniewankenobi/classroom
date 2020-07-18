@@ -9,15 +9,15 @@ class CustomObjectPage extends StatefulWidget {
 
 class _CustomObjectPageState extends State<CustomObjectPage> {
   final anchorPointStrings = [
-    "Cerebrum",
-    "Hippocampus",
-    "Parietal Lobe",
+    "Strong Legs",
+    "Fluffy Tail",
+    "Eevie's Head",
   ];
 
   final anchorPointDescs = [
-    "Front of the brain",
-    "Part of the brain that deals with memory",
-    "Deals with sensory things",
+    "Eevee, the Evolution Pokémon. Eevee is a unique Pokémon that can adapt to its environment by changing its form and abilities when evolving.",
+    "Eevee evolves into one of three Pokémon, depending on what stone is used on it.",
+    "An Eevee has an unstable genetic makeup that suddenly mutates due to its environment. Radiation from various stones causes this Pokémon to evolve.",
   ];
 
   PageController bottomSheetPageController = PageController();
@@ -28,6 +28,7 @@ class _CustomObjectPageState extends State<CustomObjectPage> {
   ARKitNode headNode;
   ARKitNode tailNode;
   String anchorId;
+  int _selectedNode = -1;
 
   @override
   void dispose() {
@@ -52,15 +53,15 @@ class _CustomObjectPageState extends State<CustomObjectPage> {
             enablePanRecognizer: true,
             showFeaturePoints: true,
             planeDetection: ARPlaneDetection.horizontal,
-            onARKitViewCreated: onARKitViewCreated,
+            onARKitViewCreated: (ARKitController arkitController) => onARKitViewCreated(arkitController, context),
           ),
         ),
       );
 
-  void onARKitViewCreated(ARKitController arkitController) {
+  void onARKitViewCreated(ARKitController arkitController, BuildContext context) {
     this.arkitController = arkitController;
     this.arkitController.onAddNodeForAnchor = _handleAddAnchor;
-    this.arkitController.onNodeTap = (nodes) => _onNodeTapHandler(nodes);
+    this.arkitController.onNodeTap = (nodes) => _onNodeTapHandler(context, nodes);
   }
 
   void _handleAddAnchor(ARKitAnchor anchor) {
@@ -82,17 +83,17 @@ class _CustomObjectPageState extends State<CustomObjectPage> {
     );
 
     legNode = ARKitNode(
-      geometry: ARKitSphere(materials: _createRandomColorMaterial(), radius: 0.013),
+      geometry: ARKitSphere(materials: _createRandomColorMaterial(this._selectedNode == 0), radius: 0.013),
       position: vector.Vector3(0.015, 0.01, 0.05),
     );
 
     headNode = ARKitNode(
-      geometry: ARKitSphere(materials: _createRandomColorMaterial(), radius: 0.013),
+      geometry: ARKitSphere(materials: _createRandomColorMaterial(this._selectedNode == 2), radius: 0.013),
       position: vector.Vector3(0.005, 0.15, 0.1),
     );
 
     tailNode = ARKitNode(
-      geometry: ARKitSphere(materials: _createRandomColorMaterial(), radius: 0.013),
+      geometry: ARKitSphere(materials: _createRandomColorMaterial(this._selectedNode == 1), radius: 0.013),
       position: vector.Vector3(0.01, 0.12, -0.09),
     );
 
@@ -102,38 +103,64 @@ class _CustomObjectPageState extends State<CustomObjectPage> {
     controller.add(tailNode, parentNodeName: anchor.nodeName);
   }
 
-  void _onNodeTapHandler(List<String> nodesList) {
+  void _onNodeTapHandler(BuildContext context, List<String> nodesList) {
     for (var i = 0; i < nodesList.length; i++) {
       if(nodesList[i] == legNode.name) {
         // Leg logic
         print("Leg Pressed INFO");
+//        legNode.geometry.materials = _createRandomColorMaterial(true);
+//        tailNode.geometry.materials = _createRandomColorMaterial(false);
+//        headNode.geometry.materials = _createRandomColorMaterial(false);
+        _buildBottomSheet(context, 0);
         break;
       } else if (nodesList[i] == tailNode.name) {
         // Tail logic
         print("Super long taillL!!!!");
+        setState(() {
+          _selectedNode = 1;
+        });
+//        legNode.geometry.materials = _createRandomColorMaterial(false);
+//        tailNode.geometry.materials = _createRandomColorMaterial(true);
+//        headNode.geometry.materials = _createRandomColorMaterial(false);
+        _buildBottomSheet(context, 1);
         break;
       } else if (nodesList[i] == headNode.name) {
         // Head logic
         print("big head boii!");
+        setState(() {
+          _selectedNode = 2;
+        });
+//        legNode.geometry.materials = _createRandomColorMaterial(false);
+//        tailNode.geometry.materials = _createRandomColorMaterial(false);
+//        headNode.geometry.materials = _createRandomColorMaterial(true);
+        _buildBottomSheet(context, 2);
         break;
       }
     }
   }
 
-  List<ARKitMaterial> _createRandomColorMaterial() {
+  List<ARKitMaterial> _createRandomColorMaterial(bool isSelected) {
+    print("SELECTED NODE: $_selectedNode");
+    var color;
+    if (isSelected) {
+      color = Colors.red;
+      print("------ RED --------");
+    } else {
+      color = Color(0xFFFFFF.toInt() << 0)
+          .withOpacity(0.5);
+    }
     return [
       ARKitMaterial(
         shininess: 0,
         transparency: 0.5,
         transparent: ARKitMaterialProperty(
-          color: Color(0xFFFFFF.toInt() << 0)
-            .withOpacity(0.5)
+          color: color,
         ),
       )
     ];
   }
 
-  void _buildBottomSheet(BuildContext context) {
+  void _buildBottomSheet(BuildContext context, int initialPage) {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.white.withOpacity(0.6),
@@ -148,7 +175,12 @@ class _CustomObjectPageState extends State<CustomObjectPage> {
           ),
           padding: EdgeInsets.all(40),
           child: PageView(
-            controller: bottomSheetPageController,
+            controller: PageController(
+              initialPage: initialPage,
+            ),
+            onPageChanged: (int index) {
+
+            },
             children: <Widget>[
               _buildBottomSheetPage(anchorPointStrings[0], anchorPointDescs[0]),
               _buildBottomSheetPage(anchorPointStrings[1], anchorPointDescs[1]),

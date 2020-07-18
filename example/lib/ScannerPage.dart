@@ -13,31 +13,15 @@ class ScannerPage extends StatefulWidget {
 class ScannerPageState extends State<ScannerPage> {
 
   Future _scanQR() async {
-//    try {
-      ScanResult qrResult = await BarcodeScanner.scan();
-      if (qrResult.rawContent == 'brain') {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => CustomObjectPage(),
-          ),
-        );
-      }
-//      setState(() {
-//
-//        qrResult.rawContent;
-//      });
-//    } on PlatformException catch(ex) {
-//
-//    } on FormatException catch(ex) {
-//      setState(() {
-//        result = "Back button pressed";
-//      });
-//    } catch (ex) {
-//      setState(() {
-//        result = "Unknown error: $ex";
-//      });
-//    }
+    ScanResult qrResult = await BarcodeScanner.scan();
+    if (qrResult.rawContent == 'brain') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => CustomObjectPage(),
+        ),
+      );
+    }
   }
 
   @override

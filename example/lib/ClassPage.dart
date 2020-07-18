@@ -1,3 +1,4 @@
+import 'package:arkit_plugin_example/BrainARPage.dart';
 import 'package:arkit_plugin_example/custom_object_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -109,7 +110,7 @@ class ClassPage extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => CustomObjectPage(),
+            builder: (context) => BrainARPage(),
           ),
         );
       },
