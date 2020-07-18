@@ -30,10 +30,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       body: Container(
+        height: MediaQuery.of(context).size.height,
         padding: EdgeInsets.only(
           top: 70,
-          left: 30,
-          right: 30,
+          left: 50,
+          right: 50,
         ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Text(
                 "Hello,",
                 style: TextStyle(
-                  fontSize: 50,
+                  fontSize: 70,
                 ),
               ),
               SizedBox(height: 10),
@@ -50,15 +51,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 "Chris Tine",
                 style: TextStyle(
                   color: Color.fromRGBO(255, 87, 87, 1),
-                  fontSize: 60,
+                  fontSize: 90,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 10),
               Divider(
                 color: Colors.grey,
               ),
-              SizedBox(height: 20),
+              SizedBox(height: 30),
               _buildScienceSection(context),
             ],
           ),
@@ -100,11 +101,11 @@ class _MyHomePageState extends State<MyHomePage> {
         Text(
           " My Classes",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: 40,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 15),
+        SizedBox(height: 25),
         Row(
           children: <Widget>[
             _buildClassCard(
@@ -113,7 +114,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(
                 Icons.bubble_chart,
                 color: Colors.white,
-                size: 70,
+                size: 100,
               ),
               Color.fromRGBO(102, 210, 210, 1),
             ),
@@ -124,27 +125,32 @@ class _MyHomePageState extends State<MyHomePage> {
               Icon(
                 Icons.school,
                 color: Colors.white,
-                size: 70,
+                size: 100,
               ),
               Color.fromRGBO(184, 125, 200, 1)
             ),
-            SizedBox(width: 10),
-          ],
-        ),
-        SizedBox(height: 15),
-        Row(
-          children: <Widget>[
+            SizedBox(width: 20),
             _buildClassCard(
               context,
               "Physics",
               Icon(
                 Icons.smartphone,
                 color: Colors.white,
-                size: 70,
+                size: 100,
               ),
               Color.fromRGBO(255, 87, 87, 1),
             ),
           ],
+        ),
+        SizedBox(height: 0),
+        Container(
+          width: 900,
+          height: 364,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage("images/playground-removebg-preview.png"),
+            ),
+          ),
         ),
       ],
     );
@@ -161,8 +167,8 @@ class _MyHomePageState extends State<MyHomePage> {
         );
       },
       child: Container(
-        width: 160,
-        height: 160,
+        width: 220,
+        height: 220,
         child: Card(
           elevation: 5,
           clipBehavior: Clip.antiAliasWithSaveLayer,
@@ -182,7 +188,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20,
+                      fontSize: 25,
                     ),
                   ),
                 ),
