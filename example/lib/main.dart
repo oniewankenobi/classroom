@@ -18,6 +18,7 @@ import 'package:arkit_plugin_example/tap_page.dart';
 import 'package:arkit_plugin_example/face_detection_page.dart';
 import 'package:arkit_plugin_example/panorama_page.dart';
 import 'package:arkit_plugin_example/real_time_updates.dart';
+import 'package:arkit_plugin_example/widget_projection.dart';
 import 'package:flutter/material.dart';
 
 
@@ -164,13 +165,13 @@ class MyApp extends StatelessWidget {
         () => Navigator.of(context).push<void>(
             MaterialPageRoute(builder: (c) => CustomAnimationPage())),
       ),
-//      Sample(
-//        'Widget Projection',
-//        'Flutter widgets in AR',
-//        Icons.widgets,
-//        () => Navigator.of(context).push<void>(
-//            MaterialPageRoute(builder: (c) => WidgetProjectionPage())),
-//      ),
+      Sample(
+        'Widget Projection',
+        'Flutter widgets in AR',
+        Icons.widgets,
+        () => Navigator.of(context).push<void>(
+            MaterialPageRoute(builder: (c) => WidgetProjectionPage())),
+      ),
       Sample(
         'Real Time Updates',
         'Calls a function once per frame',
